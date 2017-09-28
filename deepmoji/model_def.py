@@ -121,13 +121,17 @@ def deepmoji_architecture(nb_classes, nb_tokens, maxlen, feature_output=False, e
     # define embedding layer that turns word tokens into vectors
     # an activation function is used to bound the values of the embedding
     model_input = Input(shape=(maxlen,), dtype='int32')
+
+    # embedding regularization
     embed_reg = L1L2(l2=embed_l2) if embed_l2 != 0 else None
+
     embed = Embedding(input_dim=nb_tokens,
                       output_dim=256,
                       mask_zero=True,
                       input_length=maxlen,
                       embeddings_regularizer=embed_reg,
-                      name='embedding')
+                      name='word embedding')
+
     x = embed(model_input)
     x = Activation('tanh')(x)
 
