@@ -130,7 +130,7 @@ def deepmoji_architecture(nb_classes, nb_tokens, maxlen, feature_output=False, e
                       mask_zero=True,
                       input_length=maxlen,
                       embeddings_regularizer=embed_reg,
-                      name='word embedding')
+                      name='embedding')
 
     x = embed(model_input)
     x = Activation('tanh')(x)
